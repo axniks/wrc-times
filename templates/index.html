@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<meta http-equiv="refresh" content="10">
+{% endblock %}
+
+{% block title %}WRC Sessions{% endblock %}
+
+{% block content %}
+  <div class="container">
+      <h1>WRC Sessions</h1>
+      {{ wtf.quick_form(form) }}
+      <div class="list-group">
+      {% for session in data %}
+      {% set category = 'success' %} 
+      {% if session.spaces < 5 %}
+      {% set category = 'warning' %}
+      {% endif %}
+      {% if session.spaces < 3 %}
+      {% set category = 'danger' %}
+      {% endif %}
+      {% set bookingurl = 'https://bookings.better.org.uk/location/west-reservoir-centre/open-water-swimming/' %}
+      <a href="{{bookingurl}}{{session.date}}/bytime" class="list-group-item list-group-item-{{category}} d-flex justify-content-between align-items-center">
+          {{session.starts_at.format_12_hour}}
+          <span class="badge badge-primary badge-pill">{{session.spaces}}</span>
+      </a>
+      {% endfor %}
+      </div>
+  </div>
+
+{% endblock %}
+

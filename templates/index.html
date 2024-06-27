@@ -2,7 +2,7 @@
 
 {% block head %}
 {{ super() }}
-<meta http-equiv="refresh" content="10">
+<meta http-equiv="refresh" content="60">
 {% endblock %}
 
 {% block title %}WRC Sessions{% endblock %}
@@ -12,7 +12,8 @@
       <h1>WRC Sessions</h1>
       {{ wtf.quick_form(form) }}
       <div class="list-group">
-      {% for session in data %}
+          <a href="#" class="list-group-item list-group-item-info">{{data['swim_date'].strftime('%Y-%m-%d')}}</a>
+      {% for session in data['sessions'] %}
       {% set category = 'success' %} 
       {% if session.spaces < 5 %}
       {% set category = 'warning' %}
